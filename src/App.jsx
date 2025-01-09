@@ -8,7 +8,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className=" ">
+    <div className="px-6 pb-8">
       <Product />
       <Order />
     </div>
