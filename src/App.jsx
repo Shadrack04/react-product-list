@@ -48,7 +48,7 @@ function App() {
   }
 
   return (
-    <div className="px-6 pb-8 sm:grid sm:grid-cols-[70%_25%] gap-8 sm:py-8 sm:px-10">
+    <div className="px-6 pb-8 sm:grid sm:grid-cols-[65%_30%] gap-8 sm:py-8 sm:px-10">
       <Product
         cart={cart}
         handleAddToCart={handleAddToCart}
