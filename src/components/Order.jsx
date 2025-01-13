@@ -1,6 +1,6 @@
 import React from "react";
 
-function Order({ cart }) {
+function Order({ cart, setShowOrder }) {
   const numberOfItemInCart = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <div className=" h-fit w-full bg-[#fff] shadow-lg p-6 rounded-lg">
@@ -14,7 +14,7 @@ function Order({ cart }) {
             <CartItem key={item.name} item={item} />
           ))}
 
-          <OrderSummary cart={cart} />
+          <OrderSummary onClick={setShowOrder} cart={cart} />
         </div>
       ) : (
         <div className=" my-8 w-full flex flex-col items-center justify-center">
@@ -119,7 +119,7 @@ function CartItem({ item }) {
   );
 }
 
-function OrderSummary({ cart }) {
+function OrderSummary({ cart, onClick }) {
   const totalAmount = cart.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -154,7 +154,10 @@ function OrderSummary({ cart }) {
         </p>
       </div>
       <div>
-        <button className=" w-full py-2 px-6 text-xl font-semibold bg-[#fff] border-2 border-[#C7390E] rounded-full  hover:bg-[#C7390E] hover:text-[#fff] transition-colors duration-300">
+        <button
+          onClick={() => onClick(true)}
+          className=" w-full py-2 px-6 text-xl font-semibold bg-[#fff] border-2 border-[#C7390E] rounded-full  hover:bg-[#C7390E] hover:text-[#fff] transition-colors duration-300"
+        >
           Confirm Order
         </button>
       </div>
