@@ -1,6 +1,6 @@
 import React from "react";
 
-function Order() {
+function Order({ cart }) {
   return (
     <div className=" h-fit w-full bg-[#fff] shadow-lg p-6 rounded-lg">
       <h1 className=" text-[#C7390E] text-xl font-medium">
