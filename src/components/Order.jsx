@@ -1,6 +1,6 @@
 import React from "react";
 
-function Order({ cart, openCheckout }) {
+function Order({ cart, openCheckout, setCart }) {
   const numberOfItemInCart = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <div className=" h-fit w-full bg-[#fff] shadow-lg p-6 rounded-lg">
@@ -11,7 +11,7 @@ function Order({ cart, openCheckout }) {
       {cart.length > 0 ? (
         <div>
           {cart.map((item) => (
-            <CartItem key={item.name} item={item} />
+            <CartItem key={item.name} item={item} setCart={setCart} />
           ))}
 
           <OrderSummary onClick={openCheckout} cart={cart} />
@@ -83,7 +83,10 @@ function Order({ cart, openCheckout }) {
   );
 }
 
-function CartItem({ item }) {
+function CartItem({ item, setCart }) {
+  function removeCartItem(name) {
+    setCart((prevCart) => prevCart.filter((item) => item.name !== name));
+  }
   return (
     <div className=" mt-3 flex items-center justify-between border-b border-stone-300 pb-2">
       <div>
@@ -100,7 +103,10 @@ function CartItem({ item }) {
           </p>
         </div>
       </div>
-      <button className=" group/remove p-1 border border-stone-700 transition-all duration-200 rounded-full hover:border-2 hover:border-stone-950">
+      <button
+        onClick={() => removeCartItem(item.name)}
+        className=" group/remove p-1 border border-stone-700 transition-all duration-200 rounded-full hover:border-2 hover:border-stone-950"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="10"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import "./index.css";
 import Product from "./components/Product";
@@ -6,8 +6,15 @@ import Order from "./components/Order";
 import ConfirmOrder from "./components/ConfirmOrder";
 
 function App() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return JSON.parse(savedCart) || [];
+  });
   const [showOrder, setShowOrder] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   function handleAddToCart(item) {
     let isItemInCart = false;
@@ -78,7 +85,7 @@ function App() {
         handleIncreaseQuantity={handleIncreaseQuantity}
         handleDecreaseQuantity={handleDecreaseQuantity}
       />
-      <Order cart={cart} openCheckout={openCheckout} />
+      <Order cart={cart} setCart={setCart} openCheckout={openCheckout} />
     </div>
   );
 }
