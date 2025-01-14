@@ -49,9 +49,28 @@ function App() {
     );
   }
 
+  function openCheckout() {
+    setShowOrder(true);
+
+    // disable background scrolling
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeCheckout(e) {
+    console.log(e.target.textContent);
+    setShowOrder(false);
+
+    // enable background scrolling
+    document.body.style.overflow = "auto";
+
+    if (e.target.textContent === "Start New Order") {
+      setCart([]);
+    }
+  }
+
   return (
     <div className=" relative px-6 pb-8 sm:grid sm:grid-cols-[65%_30%] gap-8 sm:py-8 sm:px-10">
-      {showOrder && <ConfirmOrder cart={cart} />}
+      {showOrder && <ConfirmOrder cart={cart} closeCheckout={closeCheckout} />}
 
       <Product
         cart={cart}
@@ -59,7 +78,7 @@ function App() {
         handleIncreaseQuantity={handleIncreaseQuantity}
         handleDecreaseQuantity={handleDecreaseQuantity}
       />
-      <Order cart={cart} setShowOrder={setShowOrder} />
+      <Order cart={cart} openCheckout={openCheckout} />
     </div>
   );
 }

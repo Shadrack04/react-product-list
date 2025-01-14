@@ -1,6 +1,6 @@
 import React from "react";
 
-function Order({ cart, setShowOrder }) {
+function Order({ cart, openCheckout }) {
   const numberOfItemInCart = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <div className=" h-fit w-full bg-[#fff] shadow-lg p-6 rounded-lg">
@@ -14,7 +14,7 @@ function Order({ cart, setShowOrder }) {
             <CartItem key={item.name} item={item} />
           ))}
 
-          <OrderSummary onClick={setShowOrder} cart={cart} />
+          <OrderSummary onClick={openCheckout} cart={cart} />
         </div>
       ) : (
         <div className=" my-8 w-full flex flex-col items-center justify-center">

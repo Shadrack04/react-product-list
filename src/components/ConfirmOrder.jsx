@@ -1,26 +1,16 @@
 import React from "react";
 
-const initial = {
-  image: {
-    thumbnail: "../../images/image-waffle-thumbnail.jpg",
-    mobile: "../../images/image-waffle-mobile.jpg",
-    tablet: "../..//images/image-waffle-tablet.jpg",
-    desktop: "../..//images/image-waffle-desktop.jpg",
-  },
-  name: "Waffle with Berries",
-  category: "Waffle",
-  price: 6.5,
-};
-
-function ConfirmOrder({ cart }) {
+function ConfirmOrder({ cart, closeCheckout }) {
   const totalAmount = cart.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
   );
   return (
-    <div>
-      <div className=" absolute top-0 left-0 w-full h-full bg-[#09090939] z-5"></div>
-      <div className=" absolute top-10 left-[50%] transform -translate-x-[50%] bg-[#fff] z-10 w-full p-6 ">
+    <div
+      onClick={(e) => closeCheckout(e)}
+      className=" fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div className=" bg-[#fff] px-4 py-6 ">
         <div className=" my-4">
           <svg
             width="48"
@@ -43,7 +33,7 @@ function ConfirmOrder({ cart }) {
           <h1 className=" text-5xl font-bold my-2">Order Confirmed</h1>
           <p className=" text-xl text-stone-400">We hope you your food!</p>
         </div>
-        <div className=" bg-[#FCF9F7] p-4">
+        <div className=" bg-[#FCF9F7] p-4 mb-6">
           <div>
             {cart.map((item) => (
               <ConfirmItem key={item.name} item={item} />
@@ -57,7 +47,10 @@ function ConfirmOrder({ cart }) {
           </div>
         </div>
         <div>
-          <button className=" w-full py-2 px-6 text-xl font-semibold bg-[#fff] border-2 border-[#C7390E] rounded-full  hover:bg-[#C7390E] hover:text-[#fff] transition-colors duration-300">
+          <button
+            onClick={(e) => closeCheckout(e)}
+            className=" w-full py-2 px-6 text-xl font-semibold bg-[#fff] border-2 border-[#C7390E] rounded-full  hover:bg-[#C7390E] hover:text-[#fff] transition-colors duration-300"
+          >
             Start New Order
           </button>
         </div>
