@@ -10,7 +10,7 @@ function ConfirmOrder({ cart, closeCheckout }) {
       onClick={(e) => closeCheckout(e)}
       className=" fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
     >
-      <div className=" bg-[#fff] px-4 py-6 ">
+      <div className=" bg-[#fff] px-4 py-6 rounded-xl sm:w-[35%] ">
         <div className=" my-4">
           <svg
             width="48"
